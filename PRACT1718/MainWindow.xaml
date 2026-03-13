@@ -1,0 +1,46 @@
+﻿<Window x:Class="PRACT1718.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRACT1718"
+        mc:Ignorable="d"
+        Title="Практическая работа №17-18" Height="700" Width="1000" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem Header="Таблица">
+                <MenuItem x:Name="muAdd" Header="Добавить запись"></MenuItem>
+                <MenuItem x:Name="muEdit" Header="Изменить запись"></MenuItem>
+                <MenuItem x:Name="muDelete" Header="Удалить запись" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="О программе">
+                <MenuItem x:Name="muInfo" Header="Информация"></MenuItem>
+                <MenuItem x:Name="muExit" Header="Выход"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="dgProduct" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="10*" Header="Код" Binding="{Binding Id}" />
+                <DataGridTextColumn Width="20*" Header="Наименование" Binding="{Binding NameTovar}" />
+                <DataGridTextColumn Width="10*" Header="Цена ед." Binding="{Binding PriceUnit}" />
+                <DataGridTextColumn Width="15*" Header="Дата поступления" Binding="{Binding DateStart}" />
+                <DataGridTextColumn Width="10*" Header="№ партии" Binding="{Binding NumberPart}" />
+                <DataGridTextColumn Width="10*" Header="Размер" Binding="{Binding SizePart}" />
+                <DataGridTextColumn Width="20*" Header="Фирма-покупатель" Binding="{Binding NameFirm}" />
+                <DataGridTextColumn Width="15*" Header="Размер продаж" Binding="{Binding SizeRentPart}" />
+                <DataGridTextColumn Width="10*" Header="Цена" Binding="{Binding PriceSold}" />
+                <DataGridTextColumn Width="15*" Header="Дата продажи" Binding="{Binding DateSold}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
