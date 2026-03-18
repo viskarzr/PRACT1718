@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRACT1718"
         mc:Ignorable="d"
-        Title="Практическая работа №17-18" Height="700" Width="1000" ResizeMode="NoResize" Loaded="Window_Loaded">
+        x:Name="MainWin"
+        Title="Практическая работа №17-18" Height="700" Width="1000" ResizeMode="NoResize" Loaded="Window_Loaded" Initialized="Window_Initialized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -42,5 +43,13 @@
                 <DataGridTextColumn Width="15*" Header="Дата продажи" Binding="{Binding DateSold}" />
             </DataGrid.Columns>
         </DataGrid>
+        <GroupBox Header="Редактирование таблицы" Grid.Row="3" Margin="5">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button x:Name="btnAdd" Content="Добавить запись" Margin="5" Width="200" Click="btnAdd_Click"/>
+                <Button x:Name="btnEdit" Content="Изменить запись" Margin="5" Width="200" Click="btnEdit_Click"/>
+                <Button x:Name="btnView" Content="Посмотреть запись" Margin="5" Width="200" Click="btnView_Click"/>
+                <Button x:Name="btnDel" Content="Удалить запись" Margin="5" Width="200" Click="btnDel_Click"/>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>

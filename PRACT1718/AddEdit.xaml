@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PRACT1718"
         mc:Ignorable="d"
         x:Name="EditAddWin"
-        Height="600" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" Title="Добавление записи">
+        Height="600" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Title="Добавление записи" Loaded="EditAddWin_Loaded">
     <Grid Margin="20,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -34,18 +34,19 @@
         <Label Content="Размер проданной партии:" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center" FontWeight="DemiBold"/>
         <Label Content="Цена ед. продажи:" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" FontWeight="DemiBold"/>
         <Label Content="Дата продажи:" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" FontWeight="DemiBold"/>
-        <TextBox x:Name="tbNameTov" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="PriceEd" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <DatePicker x:Name="dpDataStart" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbNumPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbSizePart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbNameFirm" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbSizeSoldPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbSoldEd" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" Width="150"/>
-        <DatePicker x:Name="dpDateSold" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="8" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbNameTov" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Path=NameTovar}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbPriceEd" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Path=PriceUnit}" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <DatePicker x:Name="dpDataStart" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Path=DateStart}" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbSizePart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" Text="{Binding Path=SizePart}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbNameFirm" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" Text="{Binding Path=NameFirm}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbNumberPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=NumberPart}" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbSizeSoldPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" Text="{Binding Path=SizeRentPart}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbSoldEd" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" Text="{Binding Path=PriceSold}" TextWrapping="Wrap"  VerticalAlignment="Center" Width="150"/>
+        <DatePicker x:Name="dpDateSold" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="8" SelectedDate="{Binding Path=DateSold}" VerticalAlignment="Center" Width="150"/>
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Сохранить" Margin="10"/>
-            <Button Content="Отмена" Margin="10"/>
+            <Button x:Name="btnAddEdit" Content="Сохранить" Margin="10" Click="btnAddEdit_Click"/>
+            <Button x:Name="btnCansel" Content="Отмена" Margin="10"/>
         </StackPanel>
+      
     </Grid>
 </Window>

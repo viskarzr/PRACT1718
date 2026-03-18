@@ -1,0 +1,30 @@
+﻿<Window x:Class="PRACT1718.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRACT1718"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="400" FontSize="20" ResizeMode="NoResize" SizeToContent="Height" Activated="Window_Activated">
+    <Grid>
+        <StackPanel x:Name="stackPanel" VerticalAlignment="Center" >
+            <Label Content="Пользователь" Margin="5,10"/>
+            <TextBox x:Name="tbUser" TextWrapping="Wrap" Width="250" Margin="5,10"/>
+            <Label Content="Пароль" Margin="5,10"/>
+            <PasswordBox x:Name="pbPassword" Width="250" Margin="5,10"/>
+            <Grid x:Name="Grid" Visibility="Collapsed" Margin="5,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="txtCaptcha" TextWrapping="Wrap" Text="TextBlock" Background="#FF732E2E" FontSize="20" Grid.Row="0" TextAlignment="Center"/>
+                <Line x:Name="Line" Grid.Row="0" Stroke="Aquamarine" />
+                <TextBox x:Name="tbCaptcha" Grid.Row="1"/>
+            </Grid>
+            <Button x:Name="btnEnter" Content="ВОЙТИ" Margin="5,5" Click="btnEnter_Click"/>
+            <Button x:Name="btnEsc" Content="Отмена" Margin="5,5"/>
+            <Button x:Name="btnGuest" Content="Войти как ГОСТЬ" Margin="5,5" Click="btnGuest_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
