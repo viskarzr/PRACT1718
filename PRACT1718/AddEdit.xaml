@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         x:Name="EditAddWin"
         Height="600" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Title="Добавление записи" Loaded="EditAddWin_Loaded">
+    <Window.Resources>
+        <local:DateOnlyConverter x:Key="DateOnlyConverter"/>
+    </Window.Resources>
     <Grid Margin="20,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -36,13 +39,13 @@
         <Label Content="Дата продажи:" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" FontWeight="DemiBold"/>
         <TextBox x:Name="tbNameTov" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Path=NameTovar}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbPriceEd" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Path=PriceUnit}" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
-        <DatePicker x:Name="dpDataStart" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Path=DateStart}" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
+        <DatePicker x:Name="dpDataStart" Grid.Column="1" HorizontalAlignment="Center" SelectedDate="{Binding Path=DateStart, Converter={StaticResource DateOnlyConverter}}" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbSizePart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" Text="{Binding Path=SizePart}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbNameFirm" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="5" Text="{Binding Path=NameFirm}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbNumberPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=NumberPart}" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbSizeSoldPart" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="6" Text="{Binding Path=SizeRentPart}" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
         <TextBox x:Name="tbSoldEd" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" Text="{Binding Path=PriceSold}" TextWrapping="Wrap"  VerticalAlignment="Center" Width="150"/>
-        <DatePicker x:Name="dpDateSold" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="8" SelectedDate="{Binding Path=DateSold}" VerticalAlignment="Center" Width="150"/>
+        <DatePicker x:Name="dpDateSold" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="8" SelectedDate="{Binding Path=DateSold, Converter={StaticResource DateOnlyConverter}}" VerticalAlignment="Center" Width="150"/>
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnAddEdit" Content="Сохранить" Margin="10" Click="btnAddEdit_Click"/>
             <Button x:Name="btnCansel" Content="Отмена" Margin="10"/>

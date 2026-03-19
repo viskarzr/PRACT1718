@@ -36,7 +36,7 @@ namespace PRACT1718
             Random rnd = new Random();
             for (int i =1; i<=6; i++)
             {
-                captcha += captcha + masChar[rnd.Next(0, masChar.Length)];
+                captcha = captcha + masChar[rnd.Next(0, masChar.Length)];
             }
             Grid.Visibility = Visibility.Visible;
             txtCaptcha.Text = captcha;

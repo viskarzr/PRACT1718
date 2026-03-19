@@ -1,4 +1,5 @@
-﻿using PRACT1718.ModelsBD;
+﻿using Microsoft.IdentityModel.Tokens;
+using PRACT1718.ModelsBD;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -108,6 +109,30 @@ namespace PRACT1718
                 btnDel.IsEnabled = false;
                 btnEdit.IsEnabled = false;
                 MainWin.Title = MainWin.Title + " " + Data.UserSurName + " " + Data.UserName + "( " + Data.Right + " )";
+            }
+        }
+
+        private void btnFind_Click(object sender, RoutedEventArgs e)
+        {
+            List<Product> listItem = (List<Product>)dgProduct.ItemsSource;
+            var filtred = listItem.Where(p=>p.NameTovar.Contains(tbFind.Text));
+            if(filtred.Count()>0)
+            {
+                var item = filtred.First();
+                dgProduct.SelectedItem = item;  
+                dgProduct.ScrollIntoView(item);
+                dgProduct.Focus();
+            }
+        }
+
+        private void btnFiltred_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbFiltr.Text.IsNullOrEmpty() == false)
+            {
+                using (OptStoreContext _db = new OptStoreContext())
+                {
+                    //var filtred = _db.Products.Where (p=>p.DateStart == tbFiltr.Text);
+                }
             }
         }
     }

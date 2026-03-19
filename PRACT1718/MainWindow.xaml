@@ -32,7 +32,7 @@
         <DataGrid x:Name="dgProduct" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="10*" Header="Код" Binding="{Binding Id}" />
-                <DataGridTextColumn Width="20*" Header="Наименование" Binding="{Binding NameTovar}" />
+                <DataGridTextColumn Width="20*" Header="Наименование" Binding="{Binding NameTovar }"  />
                 <DataGridTextColumn Width="10*" Header="Цена ед." Binding="{Binding PriceUnit}" />
                 <DataGridTextColumn Width="15*" Header="Дата поступления" Binding="{Binding DateStart}" />
                 <DataGridTextColumn Width="10*" Header="№ партии" Binding="{Binding NumberPart}" />
@@ -49,6 +49,16 @@
                 <Button x:Name="btnEdit" Content="Изменить запись" Margin="5" Width="200" Click="btnEdit_Click"/>
                 <Button x:Name="btnView" Content="Посмотреть запись" Margin="5" Width="200" Click="btnView_Click"/>
                 <Button x:Name="btnDel" Content="Удалить запись" Margin="5" Width="200" Click="btnDel_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="Поиск и фильтрация" Grid.Row="3" Margin="5">
+            <StackPanel HorizontalAlignment="Center">
+                <Label Content="Поиск по названию:"/>
+                <TextBox x:Name="tbFind" TextWrapping="Wrap" Width="200"/>
+                <Button x:Name="btnFind" Content="Найти" Width="200" Click="btnFind_Click"/>
+                <Label Content="Фильтрация по дате поступления"/>
+                <TextBox x:Name="tbFiltr" TextWrapping="Wrap" Width="200"/>
+                <Button x:Name="btnFiltred" Content="Фильтровать" Width="200" Click="btnFiltred_Click"/>
             </StackPanel>
         </GroupBox>
     </Grid>
