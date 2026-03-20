@@ -102,7 +102,7 @@ namespace PRACT1718
             f.ShowDialog();
 
             if (Data.Login == false) Close();
-            if (Data.Right == "Администратор") ;
+            if (Data.Right == "Администратор");
             else
             {
                 btnAdd.IsEnabled = false;
@@ -131,7 +131,7 @@ namespace PRACT1718
             {
                 using (OptStoreContext _db = new OptStoreContext())
                 {
-                    //var filtred = _db.Products.Where (p=>p.DateStart == tbFiltr.Text);
+                    //var filtred = _db.Products.Where(p => p.DateStart == tbFiltr.Text);
                 }
             }
         }
