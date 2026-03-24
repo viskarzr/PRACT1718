@@ -35,47 +35,104 @@ namespace PRACT1718
                 btnAddEdit.Content = "Добавить";
                 _product = new Product();
             }
+
             else
             {
                 EditAddWin.Title = "Редактирование записи";
                 btnAddEdit.Content = "Сохранить";
                 _product = _db.Products.Find(Data.product.Id);
             }
+            EditAddWin.DataContext = _product;
         }
 
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (tbNameTov.Text.Length ==0) errors.AppendLine("Укажите название товара");
-            if (tbPriceEd.Text.Length == 0) errors.AppendLine("Укажите цену за единицу"); //доработать что нельзя меньше 0
-            // придумать как сделать что нельзя вводить дату появления на складе больше текущей и даты продажи и наоборот
-            if(tbNumberPart.Text.Length == 0) errors.AppendLine("Укажите номер партии");
-            if(tbSizePart.Text.Length == 0) errors.AppendLine("Укажите размер партии");
-            // Придумать для даты продажи и цены продажи то же самое
-
-            if (errors.Length > 0)
+            if (tbNameTov.Text.Length == 0) errors.AppendLine("Укажите название товара");
+            if (tbPriceEd.Text.Length == 0)
             {
-                MessageBox.Show(errors.ToString());
-                return;
+                errors.AppendLine("Укажите цену за единицу");
             }
-            try
+            else
             {
-                if (Data.product == null)
+                if (!decimal.TryParse(tbPriceEd.Text, out decimal price))
                 {
-                    _db.Products.Add(_product);
-                    _db.SaveChanges();
+                    errors.AppendLine("Цена должна быть числом");
+                }
+                else if (price <= 0)
+                {
+                    errors.AppendLine("Цена должна быть больше 0");
+                }
+            }
+            if (tbNumberPart.Text.Length == 0) errors.AppendLine("Укажите номер партии");
+            if (tbSizePart.Text.Length == 0)
+            {
+                errors.AppendLine("Укажите размер партии");
+            }
+            else
+            {
+                if (!int.TryParse(tbSizePart.Text, out int size))
+                {
+                    errors.AppendLine("Размер партии должен быть целым числом");
+                }
+                else if (size <= 0)
+                {
+                    errors.AppendLine("Размер партии должен быть больше 0");
+                }
+                if (dpDataStart.SelectedDate == null)
+                {
+                    errors.AppendLine("Укажите дату появления на складе");
                 }
                 else
                 {
-                    _db.SaveChanges();
+                    DateTime dateStart = dpDataStart.SelectedDate.Value;
+                    if (dateStart > DateTime.Today)
+                    {
+                        errors.AppendLine("Дата появления на складе не может быть больше текущей даты");
+                    }
                 }
-                this.Close();
+                if (dpDateSold.SelectedDate != null)
+                {
+                    DateTime dateEnd = dpDateSold.SelectedDate.Value;
+                    DateTime dateStart = dpDataStart.SelectedDate ?? DateTime.MinValue;
+
+                    if (dateEnd > DateTime.Today)
+                    {
+                        errors.AppendLine("Дата продажи не может быть больше текущей даты");
+                    }
+
+                    if (dpDataStart.SelectedDate != null && dateEnd < dateStart)
+                    {
+                        errors.AppendLine("Дата продажи не может быть раньше даты поступления на склад");
+                    }
+                }
+
+        
+
+                if (errors.Length > 0)
+                {
+                    MessageBox.Show(errors.ToString());
+                    return;
+                }
+                try
+                {
+                    if (Data.product == null)
+                    {
+                        _db.Products.Add(_product);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        _db.SaveChanges();
+                    }
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    _db.Products.Remove(_product);
+                    MessageBox.Show(ex.Message.ToString());
+                }
             }
-            catch (Exception ex)
-            {
-                _db.Products.Remove(_product);
-                MessageBox.Show(ex.Message.ToString());
-            } 
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using PRACT1718.ModelsBD;
 using System.Text;
 using System.Windows;
@@ -67,7 +69,13 @@ namespace PRACT1718
 
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dgProduct.SelectedItem!=null)
+            {
+                Data.product = (Product)dgProduct.SelectedItem;
+                AddEdit f = new AddEdit();
+                f.Owner = this;
+                f.ShowDialog();
+            }
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
@@ -115,13 +123,20 @@ namespace PRACT1718
         private void btnFind_Click(object sender, RoutedEventArgs e)
         {
             List<Product> listItem = (List<Product>)dgProduct.ItemsSource;
-            var filtred = listItem.Where(p=>p.NameTovar.Contains(tbFind.Text));
-            if(filtred.Count()>0)
+            if (DateTime.TryParse(tbFind.Text, out DateTime searchDate))
             {
-                var item = filtred.First();
-                dgProduct.SelectedItem = item;  
-                dgProduct.ScrollIntoView(item);
-                dgProduct.Focus();
+                DateOnly searchDateOnly = DateOnly.FromDateTime(searchDate);
+
+                
+                var filtred = listItem.Where(p => p.DateStart == searchDateOnly);
+
+                if (filtred.Count() > 0)
+                {
+                    var item = filtred.First();
+                    dgProduct.SelectedItem = item;
+                    dgProduct.ScrollIntoView(item);
+                    dgProduct.Focus();
+                }
             }
         }
 
@@ -131,8 +146,65 @@ namespace PRACT1718
             {
                 using (OptStoreContext _db = new OptStoreContext())
                 {
-                    //var filtred = _db.Products.Where(p => p.DateStart == tbFiltr.Text);
+                    var filtred = _db.Products.Where(p =>p.NameTovar.Contains(tbFiltr.Text));
+                    dgProduct.ItemsSource = filtred.ToList();
                 }
+            }
+            else
+            {
+                LoadBDInDataGrid();
+            }
+        }
+
+        private void btnDateStartWith_Click(object sender, RoutedEventArgs e)
+        {
+            using (OptStoreContext _db = new OptStoreContext())
+            {
+                    var dateStart = tbStartDate.Text;
+                    var start = _db.Products.FromSql($"SpisokDate {dateStart}");
+                dgProduct.ItemsSource = start.ToList();
+            }
+        
+        }
+
+        private void btnUnitCountStart_Click(object sender, RoutedEventArgs e)
+        {
+            using (OptStoreContext _db = new OptStoreContext())
+            {
+                var unit = tbUnitCol.Text;
+                var count = _db.Products.FromSql($"SpisokSizePart {unit}");
+                dgProduct.ItemsSource = count.ToList();
+
+            }
+        }
+
+        private void btnFirmChange_Click(object sender, RoutedEventArgs e)
+        {
+            using (OptStoreContext _db = new OptStoreContext())
+            {
+                var row = (Product)dgProduct.SelectedItem;
+                if (row != null)
+                {
+                    var id = new SqlParameter("@Id", row.Id);
+                    var firm = new SqlParameter("@Company", tbNewFirm.Text);
+                    var text = new SqlParameter();
+                    text.ParameterName = "@text";
+                    text.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    text.Size = 200;
+                    text.Direction = System.Data.ParameterDirection.Output;
+                    _db.Database.ExecuteSqlRaw($"ChangeFirm @Id, @Company, @text output", id, firm, text);
+                    LoadBDInDataGrid();
+
+                }
+            }
+        }
+
+        private void btnDelId_Click(object sender, RoutedEventArgs e)
+        {
+            using (OptStoreContext _db = new OptStoreContext())
+            {
+                //SqlParameter idDel = new SqlParameter("@Id", row.Id);
+                //var Del = _db.Database.ExecuteSqlRaw($"Delete from Product where Id={idDel}");
             }
         }
     }

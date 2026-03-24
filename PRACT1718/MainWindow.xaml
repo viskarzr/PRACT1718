@@ -17,6 +17,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Header="Таблица">
@@ -29,7 +31,7 @@
                 <MenuItem x:Name="muExit" Header="Выход"></MenuItem>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="dgProduct" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgProduct" Grid.ColumnSpan="4" Grid.RowSpan="2" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="10*" Header="Код" Binding="{Binding Id}" />
                 <DataGridTextColumn Width="20*" Header="Наименование" Binding="{Binding NameTovar }"  />
@@ -52,13 +54,33 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Поиск и фильтрация" Grid.Row="3" Margin="5">
-            <StackPanel HorizontalAlignment="Center">
-                <Label Content="Поиск по названию:"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Поиск по дате поступления:"/>
                 <TextBox x:Name="tbFind" TextWrapping="Wrap" Width="200"/>
                 <Button x:Name="btnFind" Content="Найти" Width="200" Click="btnFind_Click"/>
-                <Label Content="Фильтрация по дате поступления"/>
+                <Label Content="Фильтрация по названию товара:" Margin="0,5,0,0"/>
                 <TextBox x:Name="tbFiltr" TextWrapping="Wrap" Width="200"/>
                 <Button x:Name="btnFiltred" Content="Фильтровать" Width="200" Click="btnFiltred_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Header="Выборка" Grid.Row="3" Margin="5">
+            <StackPanel VerticalAlignment="Center">
+                <Label Content="Больше указанной даты:"/>
+                <TextBox x:Name="tbStartDate" TextWrapping="Wrap" Width="200"/>
+                <Button x:Name="btnDateStartWith" Content="Выбрать" Width="200" Click="btnDateStartWith_Click"/>
+                <Label Content="Кол-во поставки больше числа:" Margin="0,5,0,0"/>
+                <TextBox x:Name="tbUnitCol" TextWrapping="Wrap" Width="200"/>
+                <Button x:Name="btnUnitCountStart" Content="Выбрать" Width="200" Click="btnUnitCountStart_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="3" Header="Удаление/Обновление:" Grid.Row="3">
+            <StackPanel VerticalAlignment="Center">
+                <Label Content="Обновление фирмы-покупателя:"/>
+                <TextBox x:Name="tbNewFirm" TextWrapping="Wrap" Width="200"/>
+                <Button x:Name="btnFirmChange" Content="Обновить" Width="200" Click="btnFirmChange_Click"/>
+                <Label Content="Удаление по id:" Margin="0,5,0,0"/>
+                <TextBox x:Name="tbIdDel" TextWrapping="Wrap"  Width="200"/>
+                <Button x:Name="btnDelId" Content="Удалить" Width="200" Click="btnDelId_Click"/>
             </StackPanel>
         </GroupBox>
     </Grid>
