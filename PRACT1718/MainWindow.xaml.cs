@@ -60,6 +60,7 @@ namespace PRACT1718
             if (dgProduct.SelectedItem != null)
             {
                 Data.product = (Product)dgProduct.SelectedItem;
+                Data.num = 1;
                 AddEdit f = new AddEdit();
                 f.Owner = this;
                 f.ShowDialog();
@@ -72,6 +73,7 @@ namespace PRACT1718
             if (dgProduct.SelectedItem!=null)
             {
                 Data.product = (Product)dgProduct.SelectedItem;
+                Data.num = 0;
                 AddEdit f = new AddEdit();
                 f.Owner = this;
                 f.ShowDialog();
@@ -201,11 +203,15 @@ namespace PRACT1718
 
         private void btnDelId_Click(object sender, RoutedEventArgs e)
         {
-            using (OptStoreContext _db = new OptStoreContext())
-            {
-                //SqlParameter idDel = new SqlParameter("@Id", row.Id);
-                //var Del = _db.Database.ExecuteSqlRaw($"Delete from Product where Id={idDel}");
-            }
+            //var row = (Product)dgProduct.SelectedItem;
+            //if (row != null)
+            //{
+            //    using (OptStoreContext _db = new OptStoreContext())
+            //    {
+            //        SqlParameter idDel = new SqlParameter("@Id", row.Id);
+            //        var Del = _db.Database.ExecuteSqlRaw($"Delete from Product where Id={idDel}");
+            //    }
+            //}
         }
     }
 }

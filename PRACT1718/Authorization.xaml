@@ -17,7 +17,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="txtCaptcha" TextWrapping="Wrap" Text="TextBlock" Background="#FF732E2E" FontSize="20" Grid.Row="0" TextAlignment="Center"/>
+                <TextBlock x:Name="txtCaptcha" TextWrapping="Wrap" Background="#FF732E2E" FontSize="20" Grid.Row="0" TextAlignment="Center"/>
                 <Line x:Name="Line" Grid.Row="0" Stroke="Aquamarine" />
                 <TextBox x:Name="tbCaptcha" Grid.Row="1"/>
             </Grid>

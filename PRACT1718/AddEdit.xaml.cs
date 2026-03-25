@@ -35,6 +35,22 @@ namespace PRACT1718
                 btnAddEdit.Content = "Добавить";
                 _product = new Product();
             }
+            else if (Data.num ==0)
+            {
+                EditAddWin.Title = "Просмотр записи";
+                btnAddEdit.Content = "---";
+                _product = _db.Products.Find(Data.product.Id);
+                tbNameTov.IsReadOnly = true;
+                tbPriceEd.IsReadOnly = true;
+                dpDataStart.IsEnabled = false;
+                tbNumberPart.IsReadOnly = true;
+                tbSizePart.IsReadOnly = true;
+                tbNameFirm.IsReadOnly = true;
+                tbSizeSoldPart.IsReadOnly = true;
+                tbSoldEd.IsReadOnly = true;
+                dpDateSold.IsEnabled = false;
+                btnAddEdit.IsEnabled = false;
+            }
 
             else
             {
@@ -106,8 +122,6 @@ namespace PRACT1718
                         errors.AppendLine("Дата продажи не может быть раньше даты поступления на склад");
                     }
                 }
-
-        
 
                 if (errors.Length > 0)
                 {

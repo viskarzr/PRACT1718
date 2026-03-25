@@ -49,7 +49,7 @@ namespace PRACT1718
         }
 
         
-        private void Window_Activated(object sender, EventArgs e)
+        private void Window_Activated(object sender, EventArgs e) 
         {
             tbUser.Focus();
             Data.Login = false;
